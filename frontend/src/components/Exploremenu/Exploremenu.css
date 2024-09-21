@@ -1,0 +1,3 @@
+.exploremenu-list::-webkit-scrollbar{
+    display: none;
+}
