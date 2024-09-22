@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import RegisterView,LoginView,FoodListView,FoodDetailView
+from .views import RegisterView,LoginView,FoodListView,FoodDetailView,CartView,OrderView,OrderItemView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -9,6 +9,9 @@ urlpatterns = [
     path('login/',view=LoginView.as_view(),name='login'),
     path('foods/', FoodListView.as_view(), name='food-list'),
     path('foods/<int:pk>/', FoodDetailView.as_view(), name='food-detail'),
+    path('cart/', CartView.as_view(), name='cart'),  
+    path('orders/', OrderView.as_view(), name='order-list'),  
+    path('orders/<int:pk>/', OrderItemView.as_view(), name='order-detail'), 
 ]
 
 if settings.DEBUG:

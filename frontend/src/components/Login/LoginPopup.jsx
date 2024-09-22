@@ -58,7 +58,8 @@ function LoginPopup({ setShowLogin, setIsLoggedIn }) {
       );
 
       if (response.status === 200) {
-        const { token } = response.data;
+        console.log(response.data);
+        const  token  = response.data;
         localStorage.setItem("authToken", token);
         setIsLoggedIn(true);
         alert("Login successful");

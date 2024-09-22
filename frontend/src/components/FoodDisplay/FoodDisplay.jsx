@@ -10,9 +10,9 @@ const FoodDisplay = ({ category }) => {
       <div className="flex flex-wrap mt-5">
         {food_list.map((item, index) => {
           const imageUrl = `http://127.0.0.1:8000/api${item.image}`
-          console.log(imageUrl);
+          // console.log(imageUrl);
           
-          if (category === "All" || category === item.category) {
+          if (category === "All" || category == item.category) {
             return (
               <FoodItem
                 key={item.id}

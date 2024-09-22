@@ -6,6 +6,7 @@ const Header = () => {
   return (
     <>
       <div
+        id="home"
         className="header relative h-[40vw] sm:h-[34vw] mx-auto my-8 bg-contain bg-no-repeat bg-center"
         style={{ backgroundImage: `url(${assets.header_img})` }}
       >

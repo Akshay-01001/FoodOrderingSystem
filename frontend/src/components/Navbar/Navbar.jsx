@@ -16,7 +16,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   useEffect(() => {}, []);
 
   return (
-    <div className="navbar flex justify-between items-center p-4 text-gray-700">
+    <div className="navbar flex justify-between items-center p-4 text-gray-700 sticky top-0 z-10 bg-white">
       <img
         src={assets.logo}
         alt=""
@@ -30,7 +30,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           }`}
           onClick={() => setMenu("home")}
         >
-          Home
+         <a href="#home">Home</a>
         </li>
         <li
           className={`cursor-pointer ${
@@ -38,7 +38,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           }`}
           onClick={() => setMenu("menu")}
         >
-          Menu
+         <a href="#explore-menu">menu</a>
         </li>
         <li
           className={`cursor-pointer ${
@@ -46,7 +46,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           }`}
           onClick={() => setMenu("contact")}
         >
-          Contact Us
+         <a href="#footer">Contact us</a>
         </li>
       </ul>
       <div className="navbar-right flex items-center gap-10">
