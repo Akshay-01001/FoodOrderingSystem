@@ -79,14 +79,14 @@ class CartView(APIView):
     permission_classes = [IsAuthenticated]
     
     def get_cart(self,request):
-        print("-------------------------------------------------")
-        print(request)
+        # print("-------------------------------------------------")
+        # print(request)
         cart,_ = Cart.objects.get_or_create(user = request, is_active = True)
         return cart
     
     def get(self,request):
         cart = self.get_cart(request.user)
-        print("this is ",cart)
+        # print("this is ",cart)
         item = CartItem.objects.filter(cart = cart)
         print(item)
         serializer = CartItemSerializer(item,many=True)
@@ -94,8 +94,8 @@ class CartView(APIView):
     
     def post(self,request):
         cart = self.get_cart(request.user)
-        print("cart",cart)
-        print(request.data)
+        # print("cart",cart)
+        # print(request.data)
         food_id = request.data.get('id')
         quantity = request.data.get('quantity',1)
         message = request.data.get('message')
@@ -124,41 +124,36 @@ class CartView(APIView):
         print("saved to cart")
         return Response({"message":"Cart item added successfully."},status=status.HTTP_201_CREATED)
     
-    # def delete(self,request):
-    #     cart = self.get_cart(request.user)
-    #     food_id = request.data.get('id')
-        
-    #     try:
-    #         food = Food.objects.get(id = food_id)
-    #     except Food.DoesNotExist:
-    #         return Response({"error":"Food item does not exist."},status=status.HTTP_404_NOT_FOUND)
-        
-    #     cart_item = CartItem.objects.get(cart = cart, food = food)
-    #     cart_item.delete()
-    #     return Response({"message":"Cart item deleted successfully."},status=status.HTTP_204_NO_CONTENT)
     
 class OrderView(APIView):
     permission_classes = [IsAuthenticated]
     
-    def get(self,request):
-        order = Order.objects.filter(user = request.user)
-        serializer = OrderSerializer(order,many=True)
+    def get(self, request):
+        order = Order.objects.filter(user=request.user)
+        serializer = OrderSerializer(order, many=True)
         return Response(serializer.data)
             
-    def post(self,request):
-        serializer = OrderSerializer(data = request.data)
+    def post(self, request):
+        # print(request.user)
+        # print(request.data)
+        serializer = OrderSerializer(data=request.data)  # No user here
+        # print(serializer.is_valid())
         if serializer.is_valid():
-            serializer.save(user = request.user)
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+            order = serializer.save(user=request.user)  # Pass user when saving
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 class OrderItemView(APIView):
     permission_classes = [IsAuthenticated]
     
-    def get(self,request,pk):
+    def get(self,request):
         try:
-            order = Order.objects.get(pk=pk)
-            serializer = OrderSerializer(order)
+            order = Order.objects.get(user = request.user)
+            serializer = OrderSerializer(order,many=True)
+            print(serializer.data,"orders")
             return Response(serializer.data)
         except Order.DoesNotExist:
             return Response({"error":"Order does not exist."},status=status.HTTP_404_NOT_FOUND)

@@ -8,6 +8,7 @@ import Home from './pages/Home/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import LoginPopup from './components/Login/LoginPopup'
+import UserOrder from './pages/UserOrder/UserOrder'
 
 const App = () => {
   const [showLogin,setShowLogin] = useState(false)
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/food" element={<FoodDisplay />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/signin" element={<LoginPopup setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn}/>} />
+          <Route path='/my-orders' element={<UserOrder />} />
         </Routes>
       </Router>
    </>

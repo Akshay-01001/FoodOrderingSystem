@@ -16,7 +16,11 @@ const StoreContextProvider = (props) => {
   useEffect(() => {
     const fetchFoodData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/foods/");
+        const response = await axios.get("http://127.0.0.1:8000/api/foods/",{
+          headers: {
+            Authorization: `Token ${localStorage.getItem("authToken")}`,
+          }
+        });
         setFoodList(response.data);
       } catch (error) {
         console.log(error);
@@ -92,7 +96,7 @@ const StoreContextProvider = (props) => {
       const itemInfo = food_list.find(
         (product) => product.id === parseInt(itemId)
       );
-      console.log(itemInfo);
+      // console.log(itemInfo);
 
       if (itemInfo) {
         totalAmount += itemInfo.price * cartItems[itemId];

@@ -11,7 +11,7 @@ urlpatterns = [
     path('foods/<int:pk>/', FoodDetailView.as_view(), name='food-detail'),
     path('cart/', CartView.as_view(), name='cart'),  
     path('orders/', OrderView.as_view(), name='order-list'),  
-    path('orders/<int:pk>/', OrderItemView.as_view(), name='order-detail'), 
+    path('userorders/', OrderItemView.as_view(), name='order-detail'), 
 ]
 
 if settings.DEBUG:

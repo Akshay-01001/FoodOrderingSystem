@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const [menu, setMenu] = useState("home");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -13,6 +14,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     navigate("/");
   };
 
+  const toggleDropdown = () => {
+    setDropdownVisible((prev) => !prev);
+  };
+
   useEffect(() => {}, []);
 
   return (
@@ -20,7 +25,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
       <img
         src={assets.logo}
         alt=""
-        className="w-40 cursor-pointer"
+        className="w-40 cursor-pointer h-24 ml-4 bg-white border-none"
         onClick={() => navigate("/")}
       />
       <ul className="navbar-menu flex list-none gap-5 text-xl">
@@ -30,7 +35,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           }`}
           onClick={() => setMenu("home")}
         >
-         <a href="#home">Home</a>
+          <a href="#home">Home</a>
         </li>
         <li
           className={`cursor-pointer ${
@@ -38,7 +43,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           }`}
           onClick={() => setMenu("menu")}
         >
-         <a href="#explore-menu">menu</a>
+          <a href="#explore-menu">Menu</a>
         </li>
         <li
           className={`cursor-pointer ${
@@ -46,10 +51,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           }`}
           onClick={() => setMenu("contact")}
         >
-         <a href="#footer">Contact us</a>
+          <a href="#footer">Contact Us</a>
         </li>
       </ul>
-      <div className="navbar-right flex items-center gap-10">
+      <div className="navbar-right flex items-center gap-10 relative">
         <img src={assets.search_icon} alt="Search" className="cursor-pointer" />
         <div className="navbar-search-icon relative">
           <img
@@ -62,12 +67,36 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         </div>
 
         {isLoggedIn ? (
-          <button
-            className="px-4 py-1 border border-orange-600 rounded-lg hover:bg-orange-500 hover:text-white"
-            onClick={handleLogout} // Use handleLogout directly
-          >
-            Logout
-          </button>
+          <div className="relative">
+            <button
+              className="px-4 py-1 border-none rounded-lg hover:text-white"
+              onClick={toggleDropdown}
+            >
+              <img src={assets.profile_icon} alt="" />
+            </button>
+            {dropdownVisible && (
+              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-lg">
+                <button
+                  className="block px-4 py-2 text-gray-700 hover:bg-orange-100 w-full text-left"
+                  onClick={() => {
+                    navigate("/my-orders");
+                    setDropdownVisible(false);
+                  }}
+                >
+                  My Orders
+                </button>
+                <button
+                  className="block px-4 py-2 text-gray-700 hover:bg-orange-100 w-full text-left"
+                  onClick={() => {
+                    handleLogout();
+                    setDropdownVisible(false);
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         ) : (
           <button
             className="px-4 py-1 border border-orange-600 rounded-lg hover:bg-orange-500 hover:text-white"
@@ -82,3 +111,4 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 };
 
 export default Navbar;
+
