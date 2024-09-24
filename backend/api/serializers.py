@@ -32,6 +32,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
         
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many = True)
+    
     class Meta:
         model = Order
         fields = ['id',  'total_price', 'first_name', 'last_name', 
@@ -44,3 +45,9 @@ class OrderSerializer(serializers.ModelSerializer):
         for items in items_data:
             OrderItem.objects.create(order=order, **items)
         return order
+    
+    def update(self, instance, validated_data):
+        # Only update the status field
+        instance.status = validated_data.get('status', instance.status)
+        instance.save()
+        return instance

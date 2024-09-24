@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import LoginPopup from './components/Login/LoginPopup'
 import UserOrder from './pages/UserOrder/UserOrder'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const App = () => {
   const [showLogin,setShowLogin] = useState(false)
@@ -25,6 +27,7 @@ const App = () => {
 
   return (
    <>
+   <ToastContainer />
    {showLogin?<LoginPopup setShowLogin={setShowLogin}/>:<></>}
     <Router>
         <Routes>

@@ -25,7 +25,11 @@ function LoginPopup({ setShowLogin, setIsLoggedIn }) {
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/register/",
-        user,
+        {
+          username: user.username,
+          email: user.email,
+          password : user.password
+        },
         {
           headers: {
             "Content-Type": "application/json",
@@ -49,6 +53,7 @@ function LoginPopup({ setShowLogin, setIsLoggedIn }) {
         {
           username: user.username,
           password: user.password,
+          message : "user"
         },
         {
           headers: {

@@ -2,6 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { StoreContext } from "../../Context/StoreContext";
 import { assets } from "../../assets/assets";
+import Navbar from "../../components/Navbar/Navbar";
+import { toast } from "react-toastify";
+
 
 const UserOrder = () => {
   const { food_list } = useContext(StoreContext);
@@ -9,7 +12,7 @@ const UserOrder = () => {
   const [loading, setLoading] = useState(true); // Loading state
 
   const fetchOrders = async () => {
-    console.log("Fetching orders...");
+
     try {
       const response = await axios.get(
         "http://127.0.0.1:8000/api/orders/",
@@ -19,8 +22,7 @@ const UserOrder = () => {
           },
         }
       );
-      console.log("Orders fetched:", response.data);
-      setOrders(response.data); // Set orders to the fetched data
+      setOrders(response.data);
     } catch (error) {
       console.error("Error fetching orders:", error);
     } finally {
@@ -30,6 +32,7 @@ const UserOrder = () => {
 
   useEffect(() => {
     fetchOrders();
+    toast.success("Orders fetched successfully");
   }, []);
 
   if (loading) return <p>Loading...</p>;
@@ -37,6 +40,7 @@ const UserOrder = () => {
 
   return (
     <div className="my-orders my-12">
+      <Navbar />
       <h2 className="text-2xl font-semibold">My Orders</h2>
       <div className="flex flex-col gap-5 mt-8">
         {orders.map((order) => (
@@ -54,7 +58,7 @@ const UserOrder = () => {
               <span className="text-tomato">&#x25cf;</span>
               <b className="font-medium">{order.status}</b>
             </p>
-            <button className="border-none py-3 rounded bg-red-200 cursor-pointer text-gray-700">
+            <button className="border-none py-3 rounded bg-red-200 cursor-pointer text-gray-700" onClick={fetchOrders}>
               Track Order
             </button>
           </div>

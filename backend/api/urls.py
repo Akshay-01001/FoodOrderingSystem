@@ -10,8 +10,9 @@ urlpatterns = [
     path('foods/', FoodListView.as_view(), name='food-list'),
     path('foods/<int:pk>/', FoodDetailView.as_view(), name='food-detail'),
     path('cart/', CartView.as_view(), name='cart'),  
-    path('orders/', OrderView.as_view(), name='order-list'),  
-    path('userorders/', OrderItemView.as_view(), name='order-detail'), 
+    path('orders/', OrderView.as_view(), name='order-list'), 
+    path('orders/<int:pk>/', OrderView.as_view(), name='order-detail'), 
+    # path('userorders/', OrderItemView.as_view(), name='order-detail'), 
 ]
 
 if settings.DEBUG:
