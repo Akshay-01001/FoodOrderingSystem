@@ -47,7 +47,6 @@ class OrderSerializer(serializers.ModelSerializer):
         return order
     
     def update(self, instance, validated_data):
-        # Only update the status field
         instance.status = validated_data.get('status', instance.status)
         instance.save()
         return instance

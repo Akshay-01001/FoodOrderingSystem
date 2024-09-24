@@ -89,7 +89,7 @@ class FoodListView(APIView):
         return Response(serializer.data)
     
     def post(self,request):
-        if not request.user.is_staff:
+        if not request.user.is_superuser:
             return Response({"error":"Only staff members can add food items."},status=status.HTTP_403_FORBIDDEN)
         try:
             request.data['price'] = float(request.data['price'])
