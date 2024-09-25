@@ -7,10 +7,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and description */}
           <div>
-            <h2 className="text-2xl font-bold">Foodies</h2>
-            <p className="mt-4 text-gray-400">
-              The best place to order delicious meals from your favorite
-              restaurants.
+            <h2 className="text-2xl font-bold">FoodWagon</h2>
+            <p className="mt-4 text-gray-400" >
+              The best place to order delicious meals.
             </p>
           </div>
 
@@ -19,17 +18,12 @@ const Footer = () => {
             <h3 className="text-lg font-semibold">Useful Links</h3>
             <ul className="mt-4 space-y-2">
               <li>
-                <a href="/menu" className="hover:underline">
+                <a href="/#explore-menu" className="hover:underline">
                   Menu
                 </a>
               </li>
               <li>
-                <a href="/about" className="hover:underline">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="/contact" className="hover:underline">
+                <a href="/#footer" className="hover:underline">
                   Contact
                 </a>
               </li>
@@ -45,9 +39,9 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold">Contact</h3>
             <ul className="mt-4 space-y-2">
-              <li>Phone: +1 234 567 890</li>
-              <li>Email: support@foodies.com</li>
-              <li>Location: 123 Food Street, City, Country</li>
+              <li>Phone: +91  9999999999</li>
+              <li>Email: support@foodwagon.com</li>
+              <li>Location: Manek Chawk, Ahmedabad, India</li>
             </ul>
           </div>
 

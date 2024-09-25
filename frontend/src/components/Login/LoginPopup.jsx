@@ -3,6 +3,7 @@ import "./LoginPopup.css";
 import { assets } from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function LoginPopup({ setShowLogin, setIsLoggedIn }) {
   const [currentState, setCurrentState] = useState("Sign Up");
@@ -36,10 +37,15 @@ function LoginPopup({ setShowLogin, setIsLoggedIn }) {
           },
         }
       );
-      alert("Registered successfully");
+      toast.success("Registered successfully",{
+        autoClose:1000
+      });
       setShowLogin(false);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
+      toast.error("Register failed",{
+        autoClose:1000
+      })
       setError(
         error.response?.data || "An error occurred during registration."
       );
@@ -67,11 +73,16 @@ function LoginPopup({ setShowLogin, setIsLoggedIn }) {
         const  token  = response.data;
         localStorage.setItem("authToken", token);
         setIsLoggedIn(true);
-        alert("Login successful");
+        toast.info("Login successful",{
+          autoClose:1000
+        });
         setShowLogin(false);
         navigate("/");
       }
     } catch (error) {
+      toast.error("login failed",{
+        autoClose:1000
+      })
       setError(error.response?.data.error || "An error occurred during login.");
       console.error(error);
     }

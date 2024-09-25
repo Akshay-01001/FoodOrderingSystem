@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { StoreContext } from "../../Context/StoreContext";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar2 from "../../components/Navbar/Navbar-2";
+import Footer from "../../components/Footer/Footer";
 
 function Cart() {
   const { cartItems, food_list, removeFromCart, getTotalCartAmount } =
@@ -11,7 +12,7 @@ function Cart() {
 
   return (
     <>
-      <Navbar />
+      <Navbar2 isLoggedIn={true}/>
       <div className="cart mt-24 px-6">
         <div className="cart-items">
           <div className="cart-items-title grid grid-cols-[1fr_1.5fr_1fr_1fr_1fr_0.5fr] items-center text-gray-500 text-[max(1vw,12px)] mb-4">
@@ -102,6 +103,7 @@ function Cart() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

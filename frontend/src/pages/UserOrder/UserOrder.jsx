@@ -2,8 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { StoreContext } from "../../Context/StoreContext";
 import { assets } from "../../assets/assets";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar2 from "../../components/Navbar/Navbar-2";
 import { toast } from "react-toastify";
+import Footer from "../../components/Footer/Footer";
 
 
 const UserOrder = () => {
@@ -40,7 +41,7 @@ const UserOrder = () => {
 
   return (
     <div className="my-orders my-12">
-      <Navbar />
+      <Navbar2 isLoggedIn={true}/>
       <h2 className="text-2xl font-semibold">My Orders</h2>
       <div className="flex flex-col gap-5 mt-8">
         {orders.map((order) => (
@@ -64,6 +65,7 @@ const UserOrder = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };

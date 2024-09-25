@@ -10,7 +10,13 @@ const Home = ({isLoggedIn,setIsLoggedIn}) => {
     const [category,setCatogory] = useState("All");
 
     useEffect(()=>{
-      toast("Welcome to the Food Ordering System!")
+      toast.info("Welcome to the Food Wagon",{
+        position: "top-right",
+        autoClose: 1000,
+        pauseOnHover: false,
+        draggable: true,
+        theme: "dark",
+      })
     },[])
   return (
     <div>

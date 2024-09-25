@@ -23,7 +23,7 @@ const App = () => {
     }else{
       setIsLoggedIn(false);
     }
-  }, []);
+  }, [isLoggedIn,setIsLoggedIn]);
 
   return (
    <>
