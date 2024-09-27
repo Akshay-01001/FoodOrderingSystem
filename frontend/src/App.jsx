@@ -11,6 +11,7 @@ import LoginPopup from './components/Login/LoginPopup'
 import UserOrder from './pages/UserOrder/UserOrder'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import PaymentPage from './pages/Payment/PaymentPage'
 
 const App = () => {
   const [showLogin,setShowLogin] = useState(false)
@@ -33,11 +34,12 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
           {/* <Route path="/menu" element={<Exploremenu />} /> */}
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
           <Route path="/food" element={<FoodDisplay />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/signin" element={<LoginPopup setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn}/>} />
-          <Route path='/my-orders' element={<UserOrder />} />
+          <Route path='/my-orders' element={<UserOrder isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
+          <Route path='/payment' element={<PaymentPage />} />
         </Routes>
       </Router>
    </>

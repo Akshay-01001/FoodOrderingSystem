@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
+  const { addOrder } = useContext(StoreContext);
   const { getTotalCartAmount, cartItems, food_list } = useContext(StoreContext);
   const navigate = useNavigate();
   const [details, setDetails] = useState({
@@ -39,26 +40,26 @@ const PlaceOrder = () => {
       items: orderItems,
     };
 
-    addOrder(orderDetails);
+    // addOrder(orderDetails);
     console.log("Proceed to Payment");
     console.log(orderDetails);
-    navigate("/my-orders")
+    navigate("/payment",{state:orderDetails});
   };
 
 
-  const addOrder = async (orderDetails) => {
-    try {
-      const response = await axios.post("http://127.0.0.1:8000/api/orders/", orderDetails, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${localStorage.getItem("authToken")}`,
-        },
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.log("Error placing order: ", error);
-    }
-  };
+  // const addOrder = async (orderDetails) => {
+  //   try {
+  //     const response = await axios.post("http://127.0.0.1:8000/api/orders/", orderDetails, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Token ${localStorage.getItem("authToken")}`,
+  //       },
+  //     });
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.log("Error placing order: ", error);
+  //   }
+  // };
 
 
   const handleChange = (e) => {
@@ -178,7 +179,6 @@ const PlaceOrder = () => {
           <button
             type="submit"
             className="bg-orange-600 text-white w-full py-3 rounded-md cursor-pointer mt-4 hover:bg-orange-700 transition duration-300"
-            
           >
             PROCEED TO PAYMENT
           </button>

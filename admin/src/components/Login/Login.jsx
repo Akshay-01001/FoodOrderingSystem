@@ -17,11 +17,6 @@ function Login({isLoggedIn,setIsUserLoggedIn}) {
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/login/",
-        // {
-        //   username: user.username,
-        //   password: user.password,
-        //   message : user.message
-        // },
         user,
         {
           headers: {
@@ -42,13 +37,6 @@ function Login({isLoggedIn,setIsUserLoggedIn}) {
       console.error(error);
     }
   };
-
-  const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    setIsUserLoggedIn(false);
-    toast("Logged out successfully");
-  };
-
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
@@ -58,21 +46,7 @@ function Login({isLoggedIn,setIsUserLoggedIn}) {
     handleLogin();
   };
 
-  if (isLoggedIn) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-gray-100">
-        <div className="bg-white shadow-lg rounded-lg p-8 w-1/3">
-          <h2 className="text-2xl font-bold mb-4">Welcome, {user.username}</h2>
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
-          >
-            Logout
-          </button>
-        </div>
-      </div>
-    );
-  }
+
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100 w-full">

@@ -39,6 +39,7 @@ const StoreContextProvider = (props) => {
           Authorization: `Token ${localStorage.getItem("authToken")}`,
         },
       });
+      
       const cartData = response.data.reduce((acc, item) => {
         acc[item.food] = item.quantity;
         return acc;
@@ -129,13 +130,28 @@ const StoreContextProvider = (props) => {
     setIsAdding(false);
   };
   
+  const addOrder = async (orderDetails) => {
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/orders/", orderDetails, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.getItem("authToken")}`,
+        },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log("Error placing order: ", error);
+    }
+  };
 
   const contextValue = {
     food_list,
     cartItems,
     addToCart,
+    fetchCartData,
     removeFromCart,
     getTotalCartAmount,
+    addOrder,
   };
 
   return (

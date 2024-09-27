@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { assets } from "../../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,26 +7,33 @@ const Navbar2 = ({ isLoggedIn, setIsLoggedIn }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  // Memoize handleLogout to prevent unnecessary re-renders
+  const handleLogout = useCallback(() => {
     localStorage.removeItem("authToken");
     setIsLoggedIn(false);
-    toast.info("Logged out",{
-      autoClose:1000
+    toast.info("Logged out", {
+      autoClose: 1000,
     });
     navigate("/");
-  };
+  }, [navigate, setIsLoggedIn]);
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
   };
 
   useEffect(() => {
-
-  }, []);
+    if (!localStorage.getItem("authToken")) {
+      setIsLoggedIn(false);
+      navigate("/");
+    }
+  }, [navigate, setIsLoggedIn]);
 
   return (
     <div className="navbar flex justify-between items-center p-4 text-gray-700 sticky top-0 z-10 bg-white">
-      <div className="flex items-center cursor-pointer" onClick={() => navigate("/")}>
+      <div
+        className="flex items-center cursor-pointer"
+        onClick={() => navigate("/")}
+      >
         <img
           src={assets.food_wagon}
           alt=""

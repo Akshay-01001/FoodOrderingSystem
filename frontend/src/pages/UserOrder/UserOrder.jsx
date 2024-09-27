@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import Footer from "../../components/Footer/Footer";
 
 
-const UserOrder = () => {
+const UserOrder = ({isLoggedIn, setIsLoggedIn}) => {
   const { food_list } = useContext(StoreContext);
   const [orders, setOrders] = useState([]); // Initialize as an empty array for multiple orders
   const [loading, setLoading] = useState(true); // Loading state
@@ -41,7 +41,7 @@ const UserOrder = () => {
 
   return (
     <div className="my-orders my-12">
-      <Navbar2 isLoggedIn={true}/>
+      <Navbar2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <h2 className="text-2xl font-semibold">My Orders</h2>
       <div className="flex flex-col gap-5 mt-8">
         {orders.map((order) => (

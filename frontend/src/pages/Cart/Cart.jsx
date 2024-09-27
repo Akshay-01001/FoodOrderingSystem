@@ -4,15 +4,18 @@ import { useNavigate } from "react-router-dom";
 import Navbar2 from "../../components/Navbar/Navbar-2";
 import Footer from "../../components/Footer/Footer";
 
-function Cart() {
-  const { cartItems, food_list, removeFromCart, getTotalCartAmount } =
+function Cart({isLoggedIn,setIsLoggedIn}) {
+  const { cartItems, food_list, removeFromCart, getTotalCartAmount ,fetchCartData} =
     useContext(StoreContext);
+
   const navigate = useNavigate();
-  useEffect(() => {},[cartItems])
+  useEffect(() => {
+    fetchCartData
+  },[])
 
   return (
     <>
-      <Navbar2 isLoggedIn={true}/>
+      <Navbar2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <div className="cart mt-24 px-6">
         <div className="cart-items">
           <div className="cart-items-title grid grid-cols-[1fr_1.5fr_1fr_1fr_1fr_0.5fr] items-center text-gray-500 text-[max(1vw,12px)] mb-4">
