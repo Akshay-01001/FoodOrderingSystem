@@ -41,7 +41,7 @@ const UserOrder = ({isLoggedIn, setIsLoggedIn}) => {
 
   return (
     <div className="my-orders my-12">
-      <Navbar2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+      <Navbar2 isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} className="mb-3"/>
       <h2 className="text-2xl font-semibold">My Orders</h2>
       <div className="flex flex-col gap-5 mt-8">
         {orders.map((order) => (
@@ -53,7 +53,7 @@ const UserOrder = ({isLoggedIn, setIsLoggedIn}) => {
                 return foodItem ? `${foodItem.name} x ${item.quantity}` : `Food not found x ${item.quantity}`;
               }).join(', ')}
             </p>
-            <p>₹ {order.total_price}.00</p>
+            <p>₹ {order.total_price}</p>
             <p>Items: {order.items.length}</p>
             <p>
               <span className="text-tomato">&#x25cf;</span>

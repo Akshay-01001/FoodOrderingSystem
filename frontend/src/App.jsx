@@ -11,7 +11,8 @@ import LoginPopup from './components/Login/LoginPopup'
 import UserOrder from './pages/UserOrder/UserOrder'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import PaymentPage from './pages/Payment/PaymentPage'
+// import PaymentPage from './pages/Payment/PaymentPage';
+import PaymentPage from './pages/payment/PaymentPage'
 
 const App = () => {
   const [showLogin,setShowLogin] = useState(false)

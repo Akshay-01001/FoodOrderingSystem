@@ -5,20 +5,34 @@ import FoodDisplay from "../FoodDisplay/FoodDisplay";
 
 const Exploremenu = ({ category, setCatogory }) => {
   // const [menu, setMenu] = useState("All")
+
+  // const handleCategory = (category)=>{
+  //   if(category != "All"){
+  //     setCatogory("All")
+  //   }else{
+  //     setCatogory(category)
+  //   }
+  // }
   return (
     <div
-      className="explore-menu relative flex flex-col gap-5 w-full sm:w-3/4  mx-auto"
+      className="explore-menu relative flex flex-col gap-5 w-full sm:w-3/4  mx-auto "
       id="explore-menu"
     >
       <h1 className="font-[500] text-2xl">Explore Our Menu</h1>
       <p className="text">Choose From a Diverse Menu</p>
-      <div className="exploremenu-list flex justify-between items-center sm:gap-8 text-center overflow-x-scroll transition-[0.2s]">
+      <div className="exploremenu-list flex justify-between items-center sm:gap-8 text-center overflow-x-scroll transition-[0.2s] flex-wrap sm:flex-nowrap">
         {menu_list.map((item, index) => {
           return (
             <div
               key={index}
               className="cursor-pointer"
-              onClick={() => setCatogory(item.menu_name)}
+              onClick={() => {
+                if(category == item.menu_name){
+                  setCatogory("All")
+                }else{
+                  setCatogory(item.menu_name)
+                }
+              }}
             >
               <img
                 src={item.menu_image}

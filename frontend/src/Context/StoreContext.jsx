@@ -17,9 +17,6 @@ const StoreContextProvider = (props) => {
     const fetchFoodData = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/api/foods/",{
-          // headers: {
-          //   Authorization: `Token ${localStorage.getItem("authToken")}`,
-          // }
         });
         setFoodList(response.data);
       } catch (error) {
@@ -67,15 +64,14 @@ const StoreContextProvider = (props) => {
           },
         }
       );
-      // fetchCartData();
     } catch (error) {
       console.log(error.message);
     }
   };
 
   const addToCart = async (itemId) => {
-    if (isAdding) return;
-    setIsAdding(true);
+    // if (isAdding) return;
+    // setIsAdding(true);
   
     const currentQuantity = cartItems[itemId] || 0;
     const newQuantity = currentQuantity + 1;
@@ -139,6 +135,7 @@ const StoreContextProvider = (props) => {
         },
       });
       console.log(response.data);
+      window.location.href = "/my-orders"
     } catch (error) {
       console.log("Error placing order: ", error);
     }

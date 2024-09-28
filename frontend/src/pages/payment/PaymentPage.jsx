@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { StoreContext } from "../../Context/StoreContext";
+import {toast} from "react-toastify"
 
 const PaymentPage = () => {
   const [cardDetails, setCardDetails] = useState({
@@ -11,33 +12,92 @@ const PaymentPage = () => {
   });
 
   const { addOrder } = useContext(StoreContext);
-  const location = useLocation();  // Correctly using useLocation to get the state
-  const  orderDetails  = location.state || {};  // Extract orderDetails from location state
-  // console.log(location.state,"location");
+  const location = useLocation();  
+  const  orderDetails  = location.state || {};  
   console.log(orderDetails,"orderDetails");
-  
-  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCardDetails({ ...cardDetails, [name]: value });
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Payment details submitted: ", cardDetails);
+  //   console.log(orderDetails);
+    
+    
+  //   if (orderDetails) {
+  //     addOrder(orderDetails); 
+  //     console.log("Order placed successfully:", orderDetails);
+
+  //   } else {
+  //     console.error("No order details available.");
+  //   }
+  // };
+
+  const validateCardNumber = (number) => {
+    const regex = /^[0-9]{16}$/; // 16-digit number
+    return regex.test(number);
+  };
+
+  const validateExpDate = (expDate) => {
+    const [month, year] = expDate.split("/").map(Number);
+    if (!month || !year || month < 1 || month > 12) return false;
+    
+    const currentYear = new Date().getFullYear() % 100; // Last two digits of the year
+    const currentMonth = new Date().getMonth() + 1; // Get the current month
+  
+    return year > currentYear || (year === currentYear && month >= currentMonth);
+  };
+  
+  const validateCVV = (cvv) => {
+    const regex = /^[0-9]{3,4}$/; // 3 or 4 digits
+    return regex.test(cvv);
+  };
+
+  const validateCardholderName = (name) => {
+    const regex = /^[a-zA-Z\s]+$/; // Only letters and spaces
+    return regex.test(name) && name.trim().length > 0;
+  };
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+  
+    if (!validateCardNumber(cardDetails.cardNumber)) {
+      toast.warn("Please enter a valid 16-digit card number.");
+      return;
+    }
+  
+    if (!validateExpDate(cardDetails.expDate)) {
+      toast.warn("Please enter a valid expiration date.");
+      return;
+    }
+  
+    if (!validateCVV(cardDetails.cvv)) {
+      toast.warn("Please enter a valid CVV.");
+      return;
+    }
+  
+    if (!validateCardholderName(cardDetails.cardholderName)) {
+      toast.warn("Please enter a valid cardholder name.",{
+        autoClose:1000
+      });
+      return;
+    }
+  
     console.log("Payment details submitted: ", cardDetails);
     console.log(orderDetails);
-    
-    
+  
     if (orderDetails) {
-      addOrder(orderDetails);  // Call addOrder to save the order details
+      addOrder(orderDetails); 
       console.log("Order placed successfully:", orderDetails);
     } else {
       console.error("No order details available.");
     }
-
-    // Here you would add the logic for payment processing (e.g., Stripe)
   };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
